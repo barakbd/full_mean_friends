@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app='fullMeanModule'>
+
+<head>
+    <title>Full Mean</title>
+    <meta charset='UTF-8' />
+    <meta name='description' content='Full mean app' />
+    <meta name='keywords' content='mongodb, sockets, angular, bootstrap, express' />
+
+    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type='text/css' href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type='text/css' href="/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel='stylesheet' type='text/css' href="/css/style.css" />
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> -->
+    <script type='text/javascript' src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type='text/javascript' src="/bower_components/angular/angular.min.js"></script>
+    <script type='text/javascript' src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script type='text/javascript' src="/bower_components/angular-messages/angular-messages.min.js"></script>
+    <script type='text/javascript' src="/js/script.js"></script>
+    <script type='text/javascript' src="/js/controllers.js"></script>
+    <script type='text/javascript' src="/js/factories.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Full Mean</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li ng-class="{active: $route.current.activetab == 'friends'}"><a href="#/">Home</a></li>
+                <li ng-class="{active: $route.current.activetab ==='teams'}"><a href="#/teams">Another partial</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div ng-view=''>
+        <!-- Partials Loaded here -->
+    </div>
+    <!-- END ng-view -->
+</body>
+
+</html>

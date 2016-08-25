@@ -1,0 +1,106 @@
+<div ng-controller='friendsController' class='container'>
+    <h2>Showing all friends</h2>
+
+    <!-- FORM TO ADD NEW FRIEND -->
+    <form name='newFriendForm' class='form-inline'>
+
+        <div class='form-group'>
+            <label for='first_name'>First Name:</label>
+            <input type='text' class='form-control' name='first_name' id='first_name' ng-model='newFriend.first_name' minlength='3' required/>
+        </div>
+
+        <div class='form-group'>
+            <label for='last_name'>Last Name:</label>
+            <input type='text' class='form-control' placeholder="4-20 characters" id='last_name' ng-model='newFriend.last_name'  ng-minlength='newFriendValidations.minLength' required/>
+        </div>
+
+        <div class='form-group'>
+            <label for='age'>Age:</label>
+            <input type='number' class='form-control' id='age' ng-model='newFriend.age' min='13' max='120' required/>
+        </div>
+
+        <input type='button' class='btn btn-primary' value='Add Friend' ng-click='addFriend()' ng-disabled="newFriendForm.$invalid" />
+
+    </form>
+    <!-- END FORM TO ADD NEW FRIEND -->
+    <!-- <div class='alert alert-danger' id='erros' ng-messages="playerForm.name.$error">
+        <pn g-message="minlength">
+            Friend's name needs should be at least 4 characters and no longer than 20
+            </p>
+    </div> -->
+
+    <div id='friends_table'>
+
+        <!-- SORT AND SEARCH PARAMTERS -->
+        <h2>Sort and serach parameters</h2>
+        <table class="table table-bordered alert alert-info">
+            <tr>
+                <td>Sort Type: {{ sortType }}</td>
+                <td>Sort Reverse: {{ sortReverse }}</td>
+                <td>Search Query: {{ searchValue }}</td>
+            </tr>
+        </table>
+        <!-- END SORT AND SEARCH PARAMTERS -->
+
+        <!-- SERACH TO FILTER TABLE -->
+        <h2>Search Table</h2>
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+                    <input type="text" class="form-control" placeholder="Search Users" ng-model="searchValue">
+
+                </div>
+            </div>
+        </form>
+        <!-- SERACH TO FILTER TABLE -->
+
+        <!-- FRIEDNS TABLE -->
+        <table class='well table table-bordered table-hover'>
+            <thead>
+                <th ng-click='sortType="first_name"; sortReverse=!sortReverse'>
+                    <a href='#/'>First Name</a>
+                    <span ng-show=" sortType=='first_name' && !reverseSort" class="fa fa-caret-down"></span>
+                    <span ng-show=" sortType=='first_name' && reverseSort" class="fa fa-caret-up"></span>
+                </th>
+
+                <th ng-click='sortType="last_name"; sortReverse=!sortReverse'>
+                    <a href='#/'>Last Name</a>
+                    <span ng-show=" sortType=='last_name' && !reverseSort" class="fa fa-caret-down"></span>
+                    <span ng-show=" sortType=='last_name' && reverseSort" class="fa fa-caret-up"></span>
+                </th>
+
+                <th ng-click='sortType="age"; sortReverse=!sortReverse'>
+                    <a href='#/'>Age</a>
+                    <span ng-show=" sortType=='age' && !reverseSort" class="fa fa-caret-down"></span>
+                    <span ng-show=" sortType=='age' && reverseSort" class="fa fa-caret-up"></span>
+                </th>
+
+                <th ng-click='sortReverse=!sortReverse'>
+                    Actions
+                    </td>
+            </thead>
+            <tbody>
+                <tr ng-repeat='friend in friends | orderBy:sortType:sortReverse | filter:searchValue'>
+                    <td>
+                        {{ friend.first_name }}
+                    </td>
+                    <td ng-bind='friend.last_name'>
+                    </td>
+                    <td ng-bind='friend.age'>
+                    </td>
+                    <td>
+                        <button type="button" class='btn btn-danger' ng-click='deleteFriend(friend._id)'>Delete {{ friend.first_name }} {{ friend.last_name }}</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- END FRIEDNS TABLE -->
+
+
+    </div>
+    <!-- END #friends_table -->
+
+</div>
+<!-- END ng-controller='friendsController' -->
